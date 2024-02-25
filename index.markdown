@@ -4,3 +4,5 @@
 
 layout: home
 ---
+
+Musings and project write ups
