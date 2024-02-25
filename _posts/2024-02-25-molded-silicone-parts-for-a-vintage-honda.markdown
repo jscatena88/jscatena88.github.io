@@ -2,7 +2,7 @@
 layout: post
 title:  "Molded Silicone Parts for a Vintage Honda CJ360T"
 date:   2024-02-25 00:00:00 -0400
-categories: 3dprinting motorcycle
+tags: 3dprinting motorcycle
 ---
 ## Background
 
