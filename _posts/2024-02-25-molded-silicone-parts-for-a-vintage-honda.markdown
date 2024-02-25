@@ -54,7 +54,7 @@ My plan was to use a large syringe to inject the silicone into the mold. I sourc
 
 ### Casting
 
-When my silicone arrived I jumped right into trying my mold out. After filling the mold the part needed to cure overnight. However, I quickly realized I needed some way to seal off the fill hole of the mold. I ended up wrapping the whole mold in strips of duct tape to try and seal off both holes, but the duct tape did not stick well to the silicone covered mold and the seal was anything but liquid tight. Additionally, while the 2 part silicone claims a 6 hour cure time I found that it was still very liquidy even after 6 hours (based on the leftovers in the mixing cup). Looking at reviews for the product this seems to be a common complaint. Thankfully, since this is platinum-cure silicone the cure can be sped up with heat. I put the mold and mixing cup of leftovers in a warm spot and by the next morning they were set up.
+Upon receiving my silicone, I jumped right into trying my mold out. After filling the mold the part needed to cure overnight. However, I quickly realized I needed some way to seal off the fill hole of the mold. I ended up wrapping the whole mold in strips of duct tape to try and seal off both holes, but the duct tape did not stick well to the silicone covered mold and the seal was anything but liquid tight. Additionally, while the 2 part silicone claims a 6 hour cure time I found that it was still very liquidy even after 6 hours (based on the leftovers in the mixing cup). Looking at reviews for the product this seems to be a common complaint. Thankfully, since this is platinum-cure silicone the cure can be sped up with heat. I put the mold and mixing cup of leftovers in a warm spot and by the next morning they were set up.
 
 ### Results
 
@@ -95,7 +95,7 @@ After the pieces were fully cured I was able to remove them from the mold withou
 
 ![v2 results](/assets/molded_silicone/PXL_20240225_190009421.MP.jpg)
 
-There are still quite a few bubbles in the part, however they seem solid enough to be usable. For my next attempt I will probably let the silicone sit even longer before pouring it and see if that helps.
+There are still quite a few bubbles in the parts, however they seem solid enough to be usable. For my next attempt I will probably let the silicone sit even longer before pouring it and see if that helps.
 
 ## Wrap Up
 
