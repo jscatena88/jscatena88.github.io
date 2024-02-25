@@ -6,7 +6,7 @@ categories: 3dprinting motorcycle
 ---
 ## Background
 
-I own several motorcycles, and in my pursuit of novelty I usually buy and sell bikes fairly regularly. Most bikes stick around for 1-3 seasons on average. However, one bike I can never bring myself to sell. It is the first motorcyle I ever bought (back in 2014) a 1976 Honda CJ360t I call Josie.
+I own several motorcycles, and in my pursuit of novelty I usually buy and sell bikes fairly regularly. Most bikes stick around for 1-3 seasons on average. However, one bike I can never bring myself to sell. It is the first motorcycle I ever bought (back in 2014) a 1976 Honda CJ360T I've named Josie.
 
 ![Josie Side Profile](/assets/molded_silicone/IMG_20180630_195125.jpg)
 
