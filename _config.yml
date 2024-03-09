@@ -19,11 +19,11 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Jason Scatena
-email: jason.scatena@gmail.com
+email: jason@scatena.co
 description: >- # this means to ignore newlines until "baseurl:"
   Jason Scatena blog and personal projects
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://jscatena88.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://scatena.co" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  jscatena88
 
 # Build settings
