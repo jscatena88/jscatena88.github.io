@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Internal Mic Fix for Lenovo T14s Gen 4 w/ AMD on Ubuntu 24.04"
-date:   2024-04-26 00:00:00 -0400
+date:   2024-04-26 00:00:00 -0800
 tags: ubuntu linux lenovo amd ryzen 7840U t14s
 ---
 
