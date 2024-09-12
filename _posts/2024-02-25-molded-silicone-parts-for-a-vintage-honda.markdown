@@ -24,7 +24,7 @@ The rubber bushings on my motorcycle are all either missing or in various states
 
 | ![OEM Part](/assets/molded_silicone/HON-31403-323-000-2.jpg) |
 | :--: |
-| Picture of the original part [curtesy of PartsWarehouse](https://www.partswarehouse.com/Honda-Rubber-HON-31403-323-000-p/HON-31403-323-000.htm) |
+| Picture of the original part [courtesy of PartsWarehouse](https://www.partswarehouse.com/Honda-Rubber-HON-31403-323-000-p/HON-31403-323-000.htm) |
 
 They seem to go for ~$4 each with shipping on top of that. I need six of them which would come to $24 plus shipping (~$8 when I looked). This got me thinking about trying to produce these parts myself. These are not the only degrading rubber parts on a bike as old as this and some of those parts aren't available anymore at all. So a success here would allow me to make quite a few parts for this bike.
 
