@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Bluetooth Manometer for Carburetor Synchronization"
-date:   2024-04-26 00:00:00 -0800
+date:   2024-09-25 00:00:00 -0800
 tags: ESP32 Bluetooth Carburetor Manometer BLE
 ---
 
