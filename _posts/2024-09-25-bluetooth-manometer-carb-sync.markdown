@@ -9,9 +9,13 @@ tags: ESP32 Bluetooth Carburetor Manometer BLE
 
 In this project, I work towards creating a portable device for synchronizing carburetors that uses bluetooth to stream live vacuum pressure readings to a phone or laptop. Pressure readings are presented as a time series plot making it easier to see how adjustments are affecting the readings. Below are some photos of the device and screenshots of the UI as I used it to synchronize the carbs on my Honda. 
 
-| ![Prototype Device](/assets/bluetooth_manometer/DeviceMainImage.jpg) | ![UI Screenshot](/assets/bluetooth_manometer/UI_screenshot_cropped.jpg)  |
-| :--: | :--: |
-| The device as it exists right now | The prototype UI |
+| ![Prototype Device](/assets/bluetooth_manometer/DeviceMainImage.jpg) |
+| :--: |
+| The device as it exists right now | 
+|  :--: |
+|  ![UI Screenshot](/assets/bluetooth_manometer/UI_screenshot_cropped.jpg)  |
+|  :--: |
+| The prototype UI |
 
 ## Electrical Components Design
 
@@ -49,15 +53,15 @@ Here are some images of my CAD design:
 
 | ![Full Design Render](/assets/bluetooth_manometer/FullDesignRender.png) |
 | :--: |
-| Here is the overall appearance of the device as designed |
+| The overall appearance of the device as designed |
 | :--: |
 | ![Device with out the case top](/assets/bluetooth_manometer/DesignWithoutTop.png) |
 | :--: |
-| Here is the device with the top of the case removed |
+| The device with the top of the case removed |
 | :--: |
 | ![Cross Section View of the Case Design](/assets/bluetooth_manometer/CaseCrossSection.png)|
 | :--: |
-| Here is a cross section view of the case design |
+| A cross section view of the case design |
 
 Looking at the cross-section view:
  - The green part is a placeholder for the battery
@@ -86,8 +90,13 @@ And finally for fun here are a few printed iterations of the design as I worked 
 
 | ![Print Iterations](/assets/bluetooth_manometer/IterationsOfShellDesign.jpg) |
 | :--: |
-| A few of the iterations of the case design |
+| Iterations of the case design |
 
+## Hosted UI
+
+If you end up building one of these you can access the UI Page here on my website by scanning the QR code below of going to the URL [https://scatena.co/pressure_sense](/pressure_sense.html)
+
+![QR Code](/assets/bluetooth_manometer/pressure_sense_link_w_margin.png)
 
 ## Next Steps
 
