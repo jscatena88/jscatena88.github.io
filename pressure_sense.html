@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bluetooth Data Plotter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        canvas {
+            border: 1px solid #000;
+            margin-top: 20px;
+        }
+
+        #controls {
+            margin: 20px 0;
+        }
+
+        label,
+        input {
+            margin-right: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .slider-container input {
+            width: 300px;
+        }
+
+        .slider-container span {
+            min-width: 30px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Bluetooth Data Plotter</h1>
+    <div id="controls">
+        <button id="connectBtn">Connect to Bluetooth Device</button>
+        <label for="timeWindow">Time Window (seconds):</label>
+        <input type="number" id="timeWindow" value="30" min="1" max="300">
+        <div class="slider-container">
+            <label for="movingAverageWindow">Moving Average Window:</label>
+            <input type="range" id="movingAverageWindow" min="0" max="3" step="0.01" value="0">
+            <span id="movingAverageValue">1</span>
+        </div>
+    </div>
+    <canvas id="plotCanvas" width="800" height="400"></canvas>
+
+    <script>
+        const BLE_CONFIG = {
+            serviceUuid: 'b9e51711-5665-4cca-adf8-cfbef91a97c4',
+            characteristicUuid1: '49d190d5-a199-4850-956d-74be95d4dea2',
+            characteristicUuid2: '3144fe5c-9e80-4bbc-8c1f-6baaa4c50b49'
+        };
+
+        const UI = {
+            canvas: document.getElementById('plotCanvas'),
+            ctx: document.getElementById('plotCanvas').getContext('2d'),
+            connectBtn: document.getElementById('connectBtn'),
+            timeWindowInput: document.getElementById('timeWindow'),
+            movingAverageSlider: document.getElementById('movingAverageWindow'),
+            movingAverageValue: document.getElementById('movingAverageValue')
+        };
+
+        const GRAPH_CONFIG = {
+            padding: 50,
+            yMin: 0,
+            yMax: 25,
+            gridColor: '#d9d9d9',
+            axisColor: '#000000',
+            textColor: '#000000'
+        };
+
+        const State = {
+            device: null,
+            characteristic1: null,
+            characteristic2: null,
+            data1: [],
+            data2: [],
+            startTime: null,
+            animationId: null,
+            movingAverageWindow: 1,
+            isConnected: false
+        };
+
+        UI.connectBtn.addEventListener('click', toggleConnection);
+        UI.timeWindowInput.addEventListener('change', handleTimeWindowChange);
+        UI.movingAverageSlider.addEventListener('input', updateMovingAverageWindow);
+
+        function updateMovingAverageWindow() {
+            const logValue = parseFloat(UI.movingAverageSlider.value);
+            State.movingAverageWindow = Math.round(Math.pow(10, logValue));
+            UI.movingAverageValue.textContent = State.movingAverageWindow;
+        }
+
+        function handleTimeWindowChange() {
+            State.data1 = [];
+            State.data2 = [];
+            if (!State.isConnected) {
+                drawEmptyPlot();
+            }
+        }
+
+        async function toggleConnection() {
+            if (State.isConnected) {
+                await disconnectDevice();
+            } else {
+                await connectToDevice();
+            }
+        }
+
+        async function connectToDevice() {
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [{ services: [BLE_CONFIG.serviceUuid] }]
+                });
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService(BLE_CONFIG.serviceUuid);
+
+                State.characteristic1 = await service.getCharacteristic(BLE_CONFIG.characteristicUuid1);
+                State.characteristic1.addEventListener('characteristicvaluechanged', event => handleCharacteristicValueChanged(event, State.data1));
+                await State.characteristic1.startNotifications();
+
+                State.characteristic2 = await service.getCharacteristic(BLE_CONFIG.characteristicUuid2);
+                State.characteristic2.addEventListener('characteristicvaluechanged', event => handleCharacteristicValueChanged(event, State.data2));
+                await State.characteristic2.startNotifications();
+
+                State.device = device;
+                State.isConnected = true;
+                UI.connectBtn.textContent = 'Disconnect';
+                State.startTime = Date.now();
+                if (!State.animationId) {
+                    requestAnimationFrame(updatePlot);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while connecting to the device.');
+            }
+        }
+
+        async function disconnectDevice() {
+            if (State.device && State.device.gatt.connected) {
+                await State.device.gatt.disconnect();
+            }
+            State.isConnected = false;
+            State.device = null;
+            State.characteristic1 = null;
+            State.characteristic2 = null;
+            State.data1 = [];
+            State.data2 = [];
+            UI.connectBtn.textContent = 'Connect to Bluetooth Device';
+            cancelAnimationFrame(State.animationId);
+            State.animationId = null;
+            drawEmptyPlot();
+        }
+
+        function handleCharacteristicValueChanged(event, dataArray) {
+            const value = event.target.value;
+            const floatValue = value.getFloat32(0, true); // Assuming little-endian
+            const timestamp = Date.now();
+            dataArray.push({ time: timestamp, value: floatValue });
+
+            const timeWindow = UI.timeWindowInput.value * 1000; // Convert to milliseconds
+            while (dataArray.length > 0 && timestamp - dataArray[0].time > timeWindow) {
+                dataArray.shift();
+            }
+        }
+
+        function calculateMovingAverage(data) {
+            if (State.movingAverageWindow <= 1) return data;
+
+            return data.map((point, index, array) => {
+                const start = Math.max(0, index - State.movingAverageWindow + 1);
+                const windowSlice = array.slice(start, index + 1);
+                const sum = windowSlice.reduce((acc, curr) => acc + curr.value, 0);
+                return {
+                    time: point.time,
+                    value: sum / windowSlice.length
+                };
+            });
+        }
+
+        function updatePlot() {
+            const timeWindow = UI.timeWindowInput.value * 1000; // Convert to milliseconds
+            const currentTime = Date.now();
+
+            UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
+            drawGrid();
+            drawAxes();
+
+            const smoothedData1 = calculateMovingAverage(State.data1);
+            const smoothedData2 = calculateMovingAverage(State.data2);
+
+            plotData(smoothedData1, 'blue', currentTime, timeWindow);
+            plotData(smoothedData2, 'red', currentTime, timeWindow);
+            drawLabels();
+
+            State.animationId = requestAnimationFrame(updatePlot);
+        }
+
+        function drawEmptyPlot() {
+            UI.ctx.clearRect(0, 0, UI.canvas.width, UI.canvas.height);
+            drawGrid();
+            drawAxes();
+            drawLabels();
+        }
+
+        function drawGrid() {
+            UI.ctx.strokeStyle = GRAPH_CONFIG.gridColor;
+            UI.ctx.lineWidth = 0.5;
+
+            // Vertical lines
+            for (let x = GRAPH_CONFIG.padding; x <= UI.canvas.width - GRAPH_CONFIG.padding; x += 50) {
+                UI.ctx.beginPath();
+                UI.ctx.moveTo(x, GRAPH_CONFIG.padding);
+                UI.ctx.lineTo(x, UI.canvas.height - GRAPH_CONFIG.padding);
+                UI.ctx.stroke();
+            }
+
+            // Horizontal lines
+            for (let y = GRAPH_CONFIG.padding; y <= UI.canvas.height - GRAPH_CONFIG.padding; y += 50) {
+                UI.ctx.beginPath();
+                UI.ctx.moveTo(GRAPH_CONFIG.padding, y);
+                UI.ctx.lineTo(UI.canvas.width - GRAPH_CONFIG.padding, y);
+                UI.ctx.stroke();
+            }
+        }
+
+        function drawAxes() {
+            UI.ctx.strokeStyle = GRAPH_CONFIG.axisColor;
+            UI.ctx.lineWidth = 2;
+            UI.ctx.beginPath();
+            UI.ctx.moveTo(GRAPH_CONFIG.padding, GRAPH_CONFIG.padding);
+            UI.ctx.lineTo(GRAPH_CONFIG.padding, UI.canvas.height - GRAPH_CONFIG.padding);
+            UI.ctx.lineTo(UI.canvas.width - GRAPH_CONFIG.padding, UI.canvas.height - GRAPH_CONFIG.padding);
+            UI.ctx.stroke();
+        }
+
+        function plotData(data, color, currentTime, timeWindow) {
+            if (data.length > 1) {
+                UI.ctx.beginPath();
+                data.forEach((point, index) => {
+                    const x = GRAPH_CONFIG.padding + (point.time - (currentTime - timeWindow)) / timeWindow * (UI.canvas.width - 2 * GRAPH_CONFIG.padding);
+                    const y = UI.canvas.height - GRAPH_CONFIG.padding - (point.value - GRAPH_CONFIG.yMin) / (GRAPH_CONFIG.yMax - GRAPH_CONFIG.yMin) * (UI.canvas.height - 2 * GRAPH_CONFIG.padding);
+                    UI.ctx.lineTo(x, y);
+                });
+                UI.ctx.strokeStyle = color;
+                UI.ctx.lineWidth = 2;
+                UI.ctx.stroke();
+            }
+        }
+
+        function drawLabels() {
+            UI.ctx.fillStyle = GRAPH_CONFIG.textColor;
+            UI.ctx.font = '12px Arial';
+            UI.ctx.textAlign = 'center';
+            UI.ctx.textBaseline = 'middle';
+
+            // X-axis label
+            UI.ctx.fillText('Time (s)', UI.canvas.width / 2, UI.canvas.height - 10);
+
+            // Y-axis label
+            UI.ctx.save();
+            UI.ctx.translate(15, UI.canvas.height / 2);
+            UI.ctx.rotate(-Math.PI / 2);
+            UI.ctx.fillText('PSI', 0, 0);
+            UI.ctx.restore();
+
+            // Y-axis values
+            for (let i = 0; i <= 5; i++) {
+                const y = UI.canvas.height - GRAPH_CONFIG.padding - i * (UI.canvas.height - 2 * GRAPH_CONFIG.padding) / 5;
+                const value = GRAPH_CONFIG.yMin + i * (GRAPH_CONFIG.yMax - GRAPH_CONFIG.yMin) / 5;
+                UI.ctx.fillText(value.toFixed(1), GRAPH_CONFIG.padding - 20, y);
+            }
+
+            // X-axis values
+            const timeWindow = UI.timeWindowInput.value;
+            for (let i = 0; i <= 5; i++) {
+                const x = GRAPH_CONFIG.padding + i * (UI.canvas.width - 2 * GRAPH_CONFIG.padding) / 5;
+                const value = timeWindow - i * timeWindow / 5;
+                UI.ctx.fillText(value.toFixed(0), x, UI.canvas.height - GRAPH_CONFIG.padding + 20);
+            }
+        }
+
+        // Initialize the moving average window
+        updateMovingAverageWindow();
+
+        // Draw initial empty plot
+        drawEmptyPlot();
+    </script>
+</body>
+
+</html>
