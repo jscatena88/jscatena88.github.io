@@ -1,9 +1,13 @@
----
-layout: post
-title:  "Mechanical Autopen Simulation"
-date:   2026-02-16 00:00:00 -0800
-tags: autopen python
----
++++
+title = "Mechanical Autopen Simulation"
+date = 2026-02-16
+description = "Reverse engineering Lyndon B. Johnson's signature by simulating a mechanical Autopen device using Python and computer vision."
+
+aliases = ["/2026/02/16/mechanical-autopen-simulation/"]
+
+[taxonomies]
+tags = ["autopen", "python"]
++++
 
 Or how I nerd sniped myself and ended up reverse engineering Lyndon B. Johnson's signature
 
@@ -19,9 +23,10 @@ When I first found the listing, there was only half an hour left in the auction 
 
 I'll start with a quick primer for anyone who hasn't had the misfortune of becoming aware of what an Autopen is because of American politics. An Autopen is a device that can write out an individual's signature. The general class of devices is referred to as "signing machines", but much like Kleenex or Band-Aid, the Autopen brand name has become synonymous with the whole class. Signing machines do exactly what their name implies, they allow an individual to create a reusable representation of their signature, which can in the future be used in the signing machine to create a limitless amount of near-perfect examples of their signature on command. They have been used widely by politicians, famous individuals and others who need to sign a lot of paperwork since the 1950s.
 
-| ![US Politics is the Worst](/assets/autopen/US_Politics.jpg) |
-| :---: |
-| Hopefully you never had to see this before. But you can clearly make out the Autopen specific 4-bar linkage |
+<figure>
+  <img src="/assets/autopen/US_Politics.jpg" alt="US Politics is the Worst">
+  <figcaption>Hopefully you never had to see this before. But you can clearly make out the Autopen specific 4-bar linkage</figcaption>
+</figure>
 
 Modern Autopens are entirely computer controlled. They are essentially robotic devices that can take a digital representation of a signature and using electronic motors move a pen to render that signature onto a piece of paper. Their mechanical design does share some fairly obvious lineage with their pre-computer ancestors, however. These computer-controlled Autopens were first released into the market in the 1980s.
 
@@ -36,7 +41,7 @@ Just by staring at the mechanism, I could see how the two pins that ride along t
 
 ![Labelled Mechanism from Journal Article](/assets/autopen/Screenshot%20From%202026-02-16%2018-38-25.png)
 
-One other amazing resource I came across was a high-resolution picture of President Lyndon B. Johnson's signature matrix from his time in office made available by the National Archives. 
+One other amazing resource I came across was a high-resolution picture of President Lyndon B. Johnson's signature matrix from his time in office made available by the National Archives.
 
 ![Lyndon B. Johnson Matrix](/assets/autopen/Lyndon_B._Johnson_Autopen_Signature_Matrix_-_NARA_-_7788253.jpg)
 
@@ -44,7 +49,7 @@ One other amazing resource I came across was a high-resolution picture of Presid
 
 Having gathered enough information to get a rough understanding of the device and then seeing the President Johnson matrix, I began to form an idea. I decided I'd like to try and digitally simulate one of these mechanical Autopens, so that I can play with it and watch it and try to build an intuition for how they work. And finally I wanted to see if I could reproduce President Johnson's signature from the picture of his matrix. I did not have very high hopes I'd actually pull that second part off.
 
-I started by using the picture in the journal article to draw a sketch of the 4-bar linkage that makes up the heart of the machine and assign rough dimensions to all the pieces. 
+I started by using the picture in the journal article to draw a sketch of the 4-bar linkage that makes up the heart of the machine and assign rough dimensions to all the pieces.
 
 ![Rough Estimated Geometry](/assets/autopen/Screenshot%20From%202026-02-16%2019-09-19.png)
 
@@ -75,7 +80,7 @@ The shape of the top ridge of the matrix controls the downward pressure of the p
 
 #### Center of Rotation
 
-As I iterated on the extraction and resulting simulation, it quickly became clear that having a precise center of rotation is critical for getting a good output. Originally I had Claude determine the center of the curves it extracted, and then I manually provided an offset from that in the form of an angle and magnitude. I even had Claude create a script to sweep a large set of angles and offset magnitudes, producing ~100 images. This managed to get a very reasonable output but seemed unacceptably brittle. 
+As I iterated on the extraction and resulting simulation, it quickly became clear that having a precise center of rotation is critical for getting a good output. Originally I had Claude determine the center of the curves it extracted, and then I manually provided an offset from that in the form of an angle and magnitude. I even had Claude create a script to sweep a large set of angles and offset magnitudes, producing ~100 images. This managed to get a very reasonable output but seemed unacceptably brittle.
 
 Finally, while looking back at the images of the matrix and the Model 80, I noticed that there were 5 holes in the matrix that are seated into pegs on the turntable of the Autopen. From images of the Autopen device, it was clear that the turntable center was in the exact center of these pegs. With this insight I was able to have Claude add a step to the extraction script where I could click on 3+ peg holes on the matrix and it would use that to describe a circle and from that circle determine the center of rotation.
 
@@ -96,6 +101,8 @@ In the end, I was very pleased with the results I got from the President Johnson
 
 If I find some more motivation or this generates significant interest, there are some next steps I'd like to take in this vein of work. I'd love to recreate the simulator in TypeScript and create a website that allows a visitor to use a touch input or mouse to create a signature and then have them be created as a virtual matrix. That virtual matrix along with the LBJ matrix and maybe any other famous matrices I manage to find could then be simulated and visualized. Finally, I'd really love to be able to have the site export those templates as STL or DXF files to be 3D printed or laser cut (presumably at a smaller scale than the 2 ft across of the originals). I could then design a 3D printable Autopen type device. All of these feel very doable but would also require quite a bit of time investment. It would make a very interesting conversation piece and engineering demonstration though. It would kill it at a science or engineering museum.
 
-| ![Simulated Autopen Signature](/assets/autopen/03_lbj_signature.png) | ![Real Autopen Signature](/assets/autopen/Screenshot%20From%202026-02-16%2018-41-39.png) |
-| ---- | ----- |
-| Simulation Results | Real Autopen Signature |
+<figure style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+  <img src="/assets/autopen/03_lbj_signature.png" alt="Simulated Autopen Signature" style="max-width: 48%;">
+  <img src="/assets/autopen/Screenshot%20From%202026-02-16%2018-41-39.png" alt="Real Autopen Signature" style="max-width: 48%;">
+  <figcaption style="width: 100%;">Simulation Results (left) vs Real Autopen Signature (right)</figcaption>
+</figure>

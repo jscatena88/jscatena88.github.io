@@ -1,12 +1,17 @@
----
-layout: post
-title:  "Molded Silicone Parts Follow Up"
-date:   2024-03-28 00:00:00 -0400
-tags: 3dprinting motorcycle
----
++++
+title = "Molded Silicone Parts Follow Up"
+date = 2024-03-28
+description = "Follow-up on casting custom silicone bushings for a vintage Honda CJ360T, from prototype to installed parts."
+
+aliases = ["/2024/03/28/molded-bushings-follow-up/"]
+
+[taxonomies]
+tags = ["3dprinting", "motorcycle"]
++++
+
 ## Background
 
-In [my last post]({% post_url 2024-02-25-molded-silicone-parts-for-a-vintage-honda %}), I wrote about my experience attempting to recreate out-of-production rubber parts for my vintage motorcycle. The post left off with promising prototype parts. This follow-up covers the process of refining those prototypes into a full set of installed parts for my bike.
+In [my last post](@/blog/molded-silicone-parts-for-a-vintage-honda.md), I wrote about my experience attempting to recreate out-of-production rubber parts for my vintage motorcycle. The post left off with promising prototype parts. This follow-up covers the process of refining those prototypes into a full set of installed parts for my bike.
 
 ![Final Parts](/assets/molded_silicone_2/CompletedBushings.jpg)
 
@@ -33,15 +38,19 @@ A few days later, I found time to work on my bike in the shop. The first step wa
 
 Installing my silicone bushings, I was pleasantly surprised by how well they fit. The internal cone/washer piece that ran through the middle fit snugly without requiring excessive force.
 
-| ![Washer Mounted Front](/assets/molded_silicone_2/WasherFront.jpg) |![Washer Mounted Rear](/assets/molded_silicone_2/WasherRear.jpg)  | 
-| :--: | :--: |
-| Installed Cone Washer from the Front | Installed Cone Washer from the Back | 
+<figure style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+  <img src="/assets/molded_silicone_2/WasherFront.jpg" alt="Washer Mounted Front" style="max-width: 48%;">
+  <img src="/assets/molded_silicone_2/WasherRear.jpg" alt="Washer Mounted Rear" style="max-width: 48%;">
+  <figcaption style="width: 100%;">Installed Cone Washer from the Front (left) and Back (right)</figcaption>
+</figure>
 
 The bushings themselves were easy to install into the sheet metal holes in the air box, requiring just a bit of squeezing to get the wider part through the opening.
 
-| ![Bushing in Sheet Metal Front](/assets/molded_silicone_2/BushingMounted.jpg) | ![Bushing in Sheet Metal Side](/assets/molded_silicone_2/BushingMountedSide.jpg) |
-| :--: | :--: |
-| Front view of the bushing installed | Side profile view of the bushing. Although the side profile shot is slightly out of focus, you can make out the bushing on both sides of the sheet metal it slots into, and the nut welded to the motorcycle's frame that everything bolts down to. |
+<figure style="display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+  <img src="/assets/molded_silicone_2/BushingMounted.jpg" alt="Bushing in Sheet Metal Front" style="max-width: 48%;">
+  <img src="/assets/molded_silicone_2/BushingMountedSide.jpg" alt="Bushing in Sheet Metal Side" style="max-width: 48%;">
+  <figcaption style="width: 100%;">Front view of the bushing installed (left) and side profile view (right). Although the side profile shot is slightly out of focus, you can make out the bushing on both sides of the sheet metal it slots into, and the nut welded to the motorcycle's frame that everything bolts down to.</figcaption>
+</figure>
 
 ## Wrap Up
 

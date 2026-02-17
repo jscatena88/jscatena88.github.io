@@ -1,9 +1,14 @@
----
-layout: post
-title:  "Molded Silicone Parts for a Vintage Honda CJ360T"
-date:   2024-02-25 00:00:00 -0400
-tags: 3dprinting motorcycle
----
++++
+title = "Molded Silicone Parts for a Vintage Honda CJ360T"
+date = 2024-02-25
+description = "Using 2-part silicone and 3D printed molds to recreate out-of-production rubber bushings for a 1976 Honda CJ360T."
+
+aliases = ["/2024/02/25/molded-silicone-parts-for-a-vintage-honda/"]
+
+[taxonomies]
+tags = ["3dprinting", "motorcycle"]
++++
+
 ## Background
 
 I own several motorcycles, and in my pursuit of novelty I usually buy and sell bikes fairly regularly. Most bikes stick around for 1-3 riding seasons on average. However, one bike I can never bring myself to sell. It is the first motorcycle I ever bought (back in 2014) a 1976 Honda CJ360T I've named Josie.
@@ -16,15 +21,17 @@ As reliable as these old hondas are they are still 50 year old bikes and tend to
 
 On each side of the CJ is an airbox that holds the air filter and feeds air into the carbs. They are held onto the bike with 3 bolts (Part #20). To keep vibrations down there is a rubber bushing that isolates the airbox from the frame (part #16). Finally, there is a metal washer/collar piece that is the interface between the bolt and the bushing. Refer to the part diagram below for a visual representation.
 
-| ![Part Diagram](/assets/molded_silicone/PartDiagram.png) |
-|:--:|
-| Diagram from [Partzilla](https://www.partzilla.com/catalog/honda/motorcycle/1976/cj360t-a/air-cleaner-side-cover) |
+<figure>
+  <img src="/assets/molded_silicone/PartDiagram.png" alt="Part Diagram">
+  <figcaption>Diagram from <a href="https://www.partzilla.com/catalog/honda/motorcycle/1976/cj360t-a/air-cleaner-side-cover">Partzilla</a></figcaption>
+</figure>
 
-The rubber bushings on my motorcycle are all either missing or in various states of disintegration. The Honda part number of the bushing is `31403-323-000` and while it is no longer manufactured, some suppliers do have new-old-stock examples available. 
+The rubber bushings on my motorcycle are all either missing or in various states of disintegration. The Honda part number of the bushing is `31403-323-000` and while it is no longer manufactured, some suppliers do have new-old-stock examples available.
 
-| ![OEM Part](/assets/molded_silicone/HON-31403-323-000-2.jpg) |
-| :--: |
-| Picture of the original part [courtesy of PartsWarehouse](https://www.partswarehouse.com/Honda-Rubber-HON-31403-323-000-p/HON-31403-323-000.htm) |
+<figure>
+  <img src="/assets/molded_silicone/HON-31403-323-000-2.jpg" alt="OEM Part">
+  <figcaption>Picture of the original part <a href="https://www.partswarehouse.com/Honda-Rubber-HON-31403-323-000-p/HON-31403-323-000.htm">courtesy of PartsWarehouse</a></figcaption>
+</figure>
 
 They seem to go for ~$4 each with shipping on top of that. I need six of them which would come to $24 plus shipping (~$8 when I looked). This got me thinking about trying to produce these parts myself. These are not the only degrading rubber parts on a bike as old as this and some of those parts aren't available anymore at all. So a success here would allow me to make quite a few parts for this bike.
 
@@ -47,9 +54,10 @@ I went to Fusion 360 and started by modeling the bushing itself. From there I mo
 My plan was to use a large syringe to inject the silicone into the mold. I sourced a kit off amazon that had large syringes and a length of tubing. I sized the holes on the outside of the mold to accept the tubing.
 
 
-| ![Mold V1](/assets/molded_silicone/PXL_20240225_181432659.MP.jpg)|
-|:--:|
-| Mold V1 after printing in Gray PLA on my Prusa MK2 |
+<figure>
+  <img src="/assets/molded_silicone/PXL_20240225_181432659.MP.jpg" alt="Mold V1">
+  <figcaption>Mold V1 after printing in Gray PLA on my Prusa MK2</figcaption>
+</figure>
 
 
 ### Casting
@@ -74,7 +82,7 @@ Armed with the lessons learned from my first mold design and my first casting ex
 
 The new design started out just as before with a cube that had the model of the busing itself subtracted from the middle. Next I cut out the top of the mold with a circle just barely wider than the bushing itself (this was to create a lip I could use to gauge the height during the pour). Next, I split the cube with very shallow cone shape to create a separate top piece. I split this top in half lengthwise and added bolt holes. This gave me 3 pieces; a bottom with the pug for the central hole and two top halves that could be pulled away from the side. By pulling away from the side the mold could cast the undercut of the bushing shape and still be pulled away after curing.
 
-Finally, I decided to try for 2 parts in one go this time since the smallest batch of mix you can feasibly make is quite a bit more than what is needed for a single bushing, and any leftovers are effectively just a waste. To do that I just copied all three pieces, shifted the copies over and combined them to the original bodies. 
+Finally, I decided to try for 2 parts in one go this time since the smallest batch of mix you can feasibly make is quite a bit more than what is needed for a single bushing, and any leftovers are effectively just a waste. To do that I just copied all three pieces, shifted the copies over and combined them to the original bodies.
 
 ![V2 Split 1](/assets/molded_silicone/V2Split.PNG)
 ![V2 Split 2](/assets/molded_silicone/V2Split2.PNG)
@@ -87,7 +95,7 @@ Finally, I decided to try for 2 parts in one go this time since the smallest bat
 
 ### Casting
 
-This time casting went much smoother. I let the silicone sit for about 30 minutes after mixing so that most of the bubbles could dissipate before I tried pouring it. I then poured the mix into the mold, pouring slowly, filling the bottom completely before letting any silicone get into the top. I did this to avoid trapping air under the shelf in the mold. The seal between the mold pieces isn't perfect but the mix is viscous enough to not leak out. Finally, I put the poured molds on to my 3d printer's build plate with the heat set to 45°C and placed a cardboard box over them. 
+This time casting went much smoother. I let the silicone sit for about 30 minutes after mixing so that most of the bubbles could dissipate before I tried pouring it. I then poured the mix into the mold, pouring slowly, filling the bottom completely before letting any silicone get into the top. I did this to avoid trapping air under the shelf in the mold. The seal between the mold pieces isn't perfect but the mix is viscous enough to not leak out. Finally, I put the poured molds on to my 3d printer's build plate with the heat set to 45°C and placed a cardboard box over them.
 
 ### Results
 
