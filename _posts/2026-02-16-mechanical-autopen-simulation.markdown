@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Mechanical Autopen Simulation"
-date:   2026-02-11 00:00:00 -0800
+date:   2026-02-16 00:00:00 -0800
 tags: autopen python
 ---
 
